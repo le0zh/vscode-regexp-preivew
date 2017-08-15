@@ -36,7 +36,7 @@ export function activate(context: vscode.ExtensionContext) {
       var data = fs.readFileSync(path.join(__dirname, '../../assets', 'index.js.txt'));
       const lib = data.toString();
 
-      if(expression === ''){
+      if (expression === '') {
         return `<body> no expression </body>`;
       }
 
@@ -233,14 +233,19 @@ export function activate(context: vscode.ExtensionContext) {
     let selection = editor.selection;
     let text = editor.document.getText(selection);
 
-    expression = text;
-
-    vscode.commands.executeCommand('vscode.previewHtml', previewUri, vscode.ViewColumn.Two, 'RegExp Preview').then(
-      success => {},
-      reason => {
-        vscode.window.showErrorMessage(reason);
-      }
-    );
+    if (expression === '') {
+      // 第一次显示
+      expression = text;
+      vscode.commands.executeCommand('vscode.previewHtml', previewUri, vscode.ViewColumn.Two, 'RegExp Preview').then(
+        success => {},
+        reason => {
+          vscode.window.showErrorMessage(reason);
+        }
+      );
+    } else {
+      expression = text;
+      provider.update(previewUri);
+    }
   });
 
   context.subscriptions.push(disposable, registration);
