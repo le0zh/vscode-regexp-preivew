@@ -235,7 +235,7 @@ export function activate(context: vscode.ExtensionContext) {
 
     expression = text;
 
-    vscode.commands.executeCommand('vscode.previewHtml', previewUri, vscode.ViewColumn.Two, 'Regexper Preview').then(
+    vscode.commands.executeCommand('vscode.previewHtml', previewUri, vscode.ViewColumn.Two, 'RegExp Preview').then(
       success => {},
       reason => {
         vscode.window.showErrorMessage(reason);

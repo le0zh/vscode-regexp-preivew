@@ -1,6 +1,6 @@
 {
-    "name": "regexper",
-    "displayName": "regexper",
+    "name": "regexp-preview",
+    "displayName": "RegExp Preview",
     "description": "",
     "version": "0.0.1",
     "publisher": "le0zh",
@@ -18,7 +18,7 @@
       "commands": [
         {
           "command": "extension.showRegexper",
-          "title": "Show Regexper"
+          "title": "RegExp Preview"
         }
       ],
       "menus": {
