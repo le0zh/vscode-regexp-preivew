@@ -253,6 +253,14 @@ export function activate(context: vscode.ExtensionContext) {
     let selection = editor.selection;
     let text = editor.document.getText(selection).trim();
 
+    // 支持js构造函数的形式
+    // todo: 支持其他语言的正则构造形式
+    let reg = /^new RegExp\(([\s\S]+)\);?$/;
+    if (reg.test(text)) {
+      let tmp = new Function(`return ${text}`);
+      text = tmp().toString();
+    }
+
     if (expression === '') {
       // 第一次显示
       expression = text;
