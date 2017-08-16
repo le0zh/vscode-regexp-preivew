@@ -1,8 +1,8 @@
 {
-  "name": "regexp-preview",
-  "displayName": "RegExp Preview",
+  "name": "regexper",
+  "displayName": "RegExp Preview and Editor",
   "description": "",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "publisher": "le0zh",
   "engines": {
     "vscode": "^1.15.0"
