@@ -1,7 +1,6 @@
 # Change Log
-All notable changes to the "regexper" extension will be documented in this file.
 
-Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
-
-## [Unreleased]
+## Version 0.0.2
 - Initial release
+- new command: Regexp Preview
+- new command: Regexp Editor
