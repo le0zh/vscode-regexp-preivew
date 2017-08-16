@@ -45,6 +45,15 @@ export function activate(context: vscode.ExtensionContext) {
       <meta charset="utf-8">
       <link href="https://cdn.bootcss.com/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
       <style>
+      #error {
+        background: #b3151a;
+        color: #fff;
+        padding: 0.5em;
+        white-space: pre;
+        font-family: monospace;
+        font-weight: bold;
+        display: none;
+        overflow-x: auto; }
       .progress {
         width: 50%;
         height: 0.75em;
@@ -125,7 +134,7 @@ export function activate(context: vscode.ExtensionContext) {
       <span id="expression" style="display:none;">${expression}</span>
       <pre><code class="js">${expression}</code></pre>
       <div id="regexp-render"></div>
-
+      <div id="error"></div>
       <script type="text/html" id="svg-container-base">
         <div class="svg">
             <svg
