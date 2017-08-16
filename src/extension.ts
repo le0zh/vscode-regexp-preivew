@@ -49,7 +49,7 @@ export function activate(context: vscode.ExtensionContext) {
       const lib = data.toString();
 
       if (expression === '') {
-        return `<body> no expression </body>`;
+        return `<body> <h3>No regexp expression provided.</h3></body>`;
       }
 
       const testHtml = `
@@ -277,8 +277,8 @@ export function activate(context: vscode.ExtensionContext) {
   vscode.commands.registerCommand('extension.regexpEditor', () => {
     vscode.workspace
       .openTextDocument({
-        content: '//',
-        language: 'JavaScript',
+        content: '',
+        language: 'js',
       })
       .then(doc => {
         return vscode.window.showTextDocument(doc);
@@ -292,28 +292,21 @@ export function activate(context: vscode.ExtensionContext) {
         }
 
         var text = editor.document.getText().trim();
+        expression = text;
+
+        vscode.commands.executeCommand('vscode.previewHtml', previewUri, vscode.ViewColumn.Two, 'RegExp Preview').then(
+          success => {},
+          reason => {
+            vscode.window.showErrorMessage(reason);
+          }
+        );
 
         vscode.workspace.onDidChangeTextDocument((e: vscode.TextDocumentChangeEvent) => {
           if (e.document === vscode.window.activeTextEditor.document) {
+            expression = editor.document.getText().trim();
             provider.update(previewUri);
           }
         });
-
-        if (expression === '') {
-          // 第一次显示
-          expression = text;
-          vscode.commands
-            .executeCommand('vscode.previewHtml', previewUri, vscode.ViewColumn.Two, 'RegExp Preview')
-            .then(
-              success => {},
-              reason => {
-                vscode.window.showErrorMessage(reason);
-              }
-            );
-        } else {
-          expression = text;
-          provider.update(previewUri);
-        }
       });
   });
 
