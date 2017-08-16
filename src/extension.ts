@@ -130,7 +130,6 @@ export function activate(context: vscode.ExtensionContext) {
           font-size:18px;
       }
       </style>
-      <h1>Regexper</h1>
       <span id="expression" style="display:none;">${expression}</span>
       <pre><code class="js">${expression}</code></pre>
       <div id="regexp-render"></div>
@@ -240,7 +239,7 @@ export function activate(context: vscode.ExtensionContext) {
     console.log('command: showRegexper');
 
     let selection = editor.selection;
-    let text = editor.document.getText(selection);
+    let text = editor.document.getText(selection).trim();
 
     if (expression === '') {
       // 第一次显示
