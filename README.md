@@ -6,11 +6,11 @@ VSCode extension based on [regexper-static](https://github.com/javallone/regexpe
 
 ## Preview
 
-![](./docs/preview.png)
+![](./docs/preview.gif)
 
 ## Editor
 
-![](./docs/editor.png)
+![](./docs/editor.gif)
 
 ## Installing
 
