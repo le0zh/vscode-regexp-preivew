@@ -6,6 +6,18 @@ import * as vscode from 'vscode';
 const path = require('path');
 const fs = require('fs');
 
+function htmlEncode(str) {
+  var s = '';
+  if (str.length == 0) return '';
+  s = str.replace(/&/g, '&amp;');
+  s = s.replace(/</g, '&lt;');
+  s = s.replace(/>/g, '&gt;');
+  s = s.replace(/ /g, '&nbsp;');
+  s = s.replace(/\'/g, '&#39;');
+  s = s.replace(/\"/g, '&quot;');
+  return s;
+}
+
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
@@ -130,8 +142,8 @@ export function activate(context: vscode.ExtensionContext) {
           font-size:18px;
       }
       </style>
-      <span id="expression" style="display:none;">${expression}</span>
-      <pre><code class="js">${expression}</code></pre>
+      <pre><code class="js">${htmlEncode(expression)}</code></pre>
+      <input id="expression" type="hidden" value="${encodeURI(expression)}" />
       <div id="regexp-render"></div>
       <div id="error"></div>
       <script type="text/html" id="svg-container-base">
