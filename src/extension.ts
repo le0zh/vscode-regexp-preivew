@@ -244,11 +244,9 @@ export function activate(context: vscode.ExtensionContext) {
     var editor = vscode.window.activeTextEditor;
 
     if (!editor) {
-      vscode.window.showInformationMessage('Open a file first to manipulate text selections');
+      vscode.window.showInformationMessage('Open a file first!');
       return;
     }
-
-    console.log('command: showRegexper');
 
     let selection = editor.selection;
     let text = editor.document.getText(selection).trim();
@@ -274,6 +272,49 @@ export function activate(context: vscode.ExtensionContext) {
       expression = text;
       provider.update(previewUri);
     }
+  });
+
+  vscode.commands.registerCommand('extension.regexpEditor', () => {
+    vscode.workspace
+      .openTextDocument({
+        content: '//',
+        language: 'JavaScript',
+      })
+      .then(doc => {
+        return vscode.window.showTextDocument(doc);
+      })
+      .then(() => {
+        var editor = vscode.window.activeTextEditor;
+
+        if (!editor) {
+          vscode.window.showInformationMessage('Open a file first!');
+          return;
+        }
+
+        var text = editor.document.getText().trim();
+
+        vscode.workspace.onDidChangeTextDocument((e: vscode.TextDocumentChangeEvent) => {
+          if (e.document === vscode.window.activeTextEditor.document) {
+            provider.update(previewUri);
+          }
+        });
+
+        if (expression === '') {
+          // 第一次显示
+          expression = text;
+          vscode.commands
+            .executeCommand('vscode.previewHtml', previewUri, vscode.ViewColumn.Two, 'RegExp Preview')
+            .then(
+              success => {},
+              reason => {
+                vscode.window.showErrorMessage(reason);
+              }
+            );
+        } else {
+          expression = text;
+          provider.update(previewUri);
+        }
+      });
   });
 
   context.subscriptions.push(disposable, registration);
