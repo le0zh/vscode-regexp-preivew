@@ -5,13 +5,13 @@
   "version": "0.0.2",
   "publisher": "le0zh",
   "engines": {
-    "vscode": "^1.15.0"
+    "vscode": "^0.10.8"
   },
-  "icon": "docs/icon.png",
   "galleryBanner": {
-    "color": "#C80000",
+    "color": "#3B3738",
     "theme": "dark"
   },
+  "icon": "docs/icon.png",
   "homepage": "https://github.com/le0zh/vscode-regexp-preivew/blob/master/README.md",
   "bugs": {
     "url": "https://github.com/le0zh/vscode-regexp-preivew/issues",
