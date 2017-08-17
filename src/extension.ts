@@ -268,6 +268,12 @@ export function activate(context: vscode.ExtensionContext) {
           vscode.window.showErrorMessage(reason);
         }
       );
+
+      vscode.workspace.onDidCloseTextDocument((e: vscode.TextDocument) => {
+        if (e.uri.scheme === 'regexper-preview') {
+          expression = '';
+        }
+      });
     } else {
       expression = text;
       provider.update(previewUri);
